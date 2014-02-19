@@ -1,28 +1,54 @@
 # include <SFML/Graphics.hpp>
- 
+
+using namespace sf;
+
+const int H = 12;
+const int W = 40;
+
+
+
 int main()
-{
-    // Создаём окно
-    sf::RenderWindow App(sf::VideoMode(800, 600, 32), "Hello World - SFML");
- 
-    // Основной цикл
-    while (App.isOpen())
-    {
-        // Проверяем события (нажатие кнопки, закрытие окна и т.д.)
-        sf::Event Event;
-        while (App.pollEvent(Event))
-        {
-            // если событие "закрытие окна":
-            if (Event.type == sf::Event::Closed)
-                App.close();
-        }
- 
-        // очищаем экран, и заливаем его синим цветом
-        App.clear(sf::Color(0,0,255));
- 
-        // отображаем на экран
-        App.display();
-    }
- 
-    return 0;
+	{
+		RenderWindow window (VideoMode (1100, 700), "SpiceCrip"); // Создаем окно 1100*700 и title = SpiceCrip
+		Texture HeroShip; // текстурка
+		HeroShip.loadFromFile("ships.png"); // грузим изображение
+   
+		/* Задаем координаты из спрайта нашего кораблика */
+		Sprite Hero;
+		Hero.setTexture(HeroShip);
+		Hero.setTextureRect (IntRect (38,42,79,62));
+		Hero.setPosition(70,62);
+   
+	
+		Clock clock;
+		while (window.isOpen())
+			{
+
+				float time = clock.getElapsedTime().asMicroseconds();
+				clock.restart();
+				time = time/800;
+				Event event;
+
+				while (window.pollEvent(event))
+					{ 
+						if (event.type == Event::Closed)
+						window.close();
+					}
+
+
+				if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)){Hero.move(-0.8*time,0);}
+
+				if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D) ){ Hero.move(0.8*time,0);}
+
+				if (Keyboard::isKeyPressed(Keyboard::Down)  || Keyboard::isKeyPressed(Keyboard::S) ){Hero.move(0,0.8*time);}
+
+				if (Keyboard::isKeyPressed(Keyboard::Up)  || Keyboard::isKeyPressed(Keyboard::W) ){Hero.move(0,-0.8*time);}
+		  
+
+				window.clear(Color::Black);
+				window.draw(Hero);
+				window.display();
+   }
+
+   return 0;
 }
