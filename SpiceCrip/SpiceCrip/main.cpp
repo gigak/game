@@ -2,11 +2,6 @@
 
 using namespace sf;
 
-const int H = 12;
-const int W = 40;
-
-
-
 int main()
 	{
 		RenderWindow window (VideoMode (1100, 700), "SpiceCrip"); // Создаем окно 1100*700 и title = SpiceCrip
