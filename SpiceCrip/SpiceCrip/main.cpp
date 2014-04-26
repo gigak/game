@@ -1,61 +1,11 @@
 #pragma once
 #include "header.h"
 #include "bullet.h"
+#include "Player.h"
+#include "Background.h"
 #include "anim.hpp"
 class Bullet;
 
-class PLAYER {
-
-public:
-	float dx,dy;
-	FloatRect rect; // вместо 4 координат в одну
-	Sprite sprite;
-
-	PLAYER(Texture &image){
-		sprite.setTexture(image);
-		rect = FloatRect(580,480,79,62);
-		sprite.setTextureRect(IntRect (35,42,80,81));
-		sprite.setPosition(500,500);
-		dx = 0;
-		dy = 0;
-	}
-
-	void update(float time){
-
-	 rect.left += dx * time;
-	 rect.top += dy * time;
-
-	//sprite.setPosition(rect.left, rect.top);
-
-	//dx=0;
-	}
-};
-
-
-class pBack{
-public:
-	//int x,y;
-	double speed;
-	sf::Time time;
-	//FloatRect pRect;
-	sf::Sprite pSprite;
-
-
-	pBack(Texture &image) { pSprite.setTexture(image); speed = 400; time = sf::seconds(1/6000.f); }
-	void MoveBack();
-
-	
-
-};
-
-
-void pBack::MoveBack()
-{
-	sf::Vector2f movement(0.f,0.f);
-
-	movement.y +=speed;
-	pSprite.move( movement * time.asSeconds() );
-}
 
 
 
@@ -147,10 +97,6 @@ int main()
 				
 	
 
-				sf::Music music;
-				if (!music.openFromFile("music.ogg"))
-					return -1; // error
-				music.play();
 
 			
 
